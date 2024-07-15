@@ -12,8 +12,10 @@ public class RabbitMQMessageConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQMessageConsumer.class);
     public static final String QUEUE = "akogare-main-queue";
 
+
     @RabbitListener(queues = QUEUE)
-    public void consumeMessage(@Payload RabbitMQMessage message) {
+    public void consumeMessage(@Payload IOMessage message) {
         LOGGER.info("Received message: {}", message);
+
     }
 }

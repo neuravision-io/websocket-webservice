@@ -33,12 +33,8 @@ jobs:
 
     - name: Build Docker image latest
       if: success()
-      run: docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/akogare-ng-websocket:latest .
+      run: docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/akogare-ng-websocket:latest -t ${{ secrets.DOCKER_REGISTRY_URL }}/akogare-ng-websocket:0.0.1-RELEASE .
 
-    - name: Build Docker image version release
-      if: success()
-      run: docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/akogare-ng-websocket:0.0.1-RELEASE .
-      
     - name: Push Docker image latest
       if: success()
       run: docker push ${{ secrets.DOCKER_REGISTRY_URL }}/akogare-ng-websocket:latest

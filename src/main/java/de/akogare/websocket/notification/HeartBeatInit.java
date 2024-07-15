@@ -1,6 +1,6 @@
 package de.akogare.websocket.notification;
 
-import de.akogare.websocket.amqp.RabbitMQMessage;
+import de.akogare.websocket.amqp.IOMessage;
 import de.akogare.websocket.config.MQConfig;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.CommandLineRunner;
@@ -25,12 +25,12 @@ public class HeartBeatInit {
 
     @Bean
     public CommandLineRunner commandLineRunner() {
-        RabbitMQMessage rabbitMQMessage = new RabbitMQMessage(Messages.HEARTBEAT, UUID.randomUUID().toString(), Date.from(Instant.now()));
+        IOMessage IOMessage = new IOMessage(NotificationType.ERROR, NotificationAction.HEARTBEAT, Messages.HEARTBEAT,  UUID.randomUUID().toString(), Date.from(Instant.now()), null);
 
         return args -> {
-            for (int i = 0; i < 10; i++) {
-                rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, rabbitMQMessage);
-                websocketTemplate.convertAndSend("/topic/main", rabbitMQMessage);
+            for (int i = 0; i < 5; i++) {
+                rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, IOMessage);
+                websocketTemplate.convertAndSend("/topic/main", IOMessage);
             }
         };
     }

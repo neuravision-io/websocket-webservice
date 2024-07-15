@@ -8,11 +8,11 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class AnalyzeController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AnalyzeController.class);
+public class WebsocketController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebsocketController.class);
     private final SimpMessagingTemplate messagingTemplate;
 
-    public AnalyzeController(SimpMessagingTemplate messagingTemplate) {
+    public WebsocketController(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
     }
 
